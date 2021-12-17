@@ -1,0 +1,46 @@
+* {
+    color: white;
+}
+
+.background {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    /*background-color: black;*/
+    background: linear-gradient(45deg, black, #2a012a)
+}
+
+.dialogBox {
+    /*position: fixed;*/
+    padding: 5vw;
+    /*left: 50%;*/
+    /*top: 50%;*/
+    /*transform: translate(-50%, -50%);*/
+    border-radius: 5vw;
+    background-color: blue;
+    color: white;
+    font-size: 2vw;
+    box-shadow: 1vw 1vw 1vw rgba(0, 0, 255, 0.5);
+}
+
+.dialogBoxBackground {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.screenBox {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.divCenter {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
