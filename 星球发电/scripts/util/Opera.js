@@ -8,43 +8,20 @@ export function title(content, callback, timeIn = 500, timeDelay = 1000, timeOut
         .html(content)
         .hide()
     $body.append($div);
-    $div.fadeIn(_speedTime(timeIn), function () {
+    $div.fadeIn(timeIn, function () {
         setTimeout(function () {
             if (callback) {
-                $div.fadeOut(_speedTime(timeOut), callback)
+                $div.fadeOut(timeOut, callback)
             } else {
-                $div.fadeOut(_speedTime(timeOut))
+                $div.fadeOut(timeOut)
             }
-        }, _speedTime(timeDelay))
+        }, timeDelay)
     })
 }
 
 export function creatElement(name) {
     return $(`<${name} />`);
 }
-
-/**
- * @param $element
- * @param {number} time
- */
-export function slideAndFadeIn($element, time) {
-    $element.hide().css({'opacity': '0'}).slideDown(_speedTime(time / 2), function () {
-        $element.animate({"opacity": "1"}, _speedTime(time / 2))
-    })
-}
-
-/**
- * @param $element
- * @param {number} time
- */
-export function slideAndFadeOut($element, time) {
-    $element.animate({"opacity": "0"}, _speedTime(time / 2), function () {
-        $element.slideUp(_speedTime(time / 2), function () {
-            $element.hide().css({'opacity': '1'})
-        })
-    })
-}
-
 export function clearObject(object) {
     for (const key in object) {
         delete object[key];

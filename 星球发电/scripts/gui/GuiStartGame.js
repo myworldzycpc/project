@@ -1,10 +1,11 @@
 import {compare} from "../util/Algorithm.js";
 import {Button, Dialog, Screen} from "./GuiScreen.js";
-import {soundPlayer$nightClothes, storage} from "../Init.js";
+import {soundPlayer$nightClothes} from "../Init.js";
 import {begin, screen$beginOfAll} from "./GuiBeginOfAll.js";
 import {screen$homeOfEarth} from "./GuiEarthHome.js";
 import {showSettings} from "../Settings.js";
 import {creatElement} from "../util/Opera.js";
+import {storage} from "../SavedData.js";
 
 export const screen$startGame = new Screen();
 

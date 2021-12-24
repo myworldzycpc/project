@@ -1,7 +1,7 @@
 import {Button, Dialog} from "./gui/GuiScreen.js";
 import {clearCookie} from "./Cookie.js";
-import {storage} from "./Init.js";
 import {clearObject, creatElement} from "./util/Opera.js";
+import {storage} from "./SavedData.js";
 
 export function showSettings() {
     const dialog$clearAll = new Dialog("", true);

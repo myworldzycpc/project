@@ -1,8 +1,8 @@
 import * as Cookie from "./Cookie.js"
-import {getCookie} from "./Cookie.js"
 import {SoundPlayer} from "./gui/GuiScreen.js";
 import {creatElement} from "./util/Opera.js";
 import {_speedTime} from "./util/Algorithm.js";
+import {storage} from "./SavedData.js";
 
 window.maxZIndex = 10;
 
@@ -10,12 +10,6 @@ export const screenData = {
     present: undefined,
     all: [],
 }
-
-export const storage = Cookie.getCookie("data") ? JSON.parse(atob(getCookie("data"))) : {};
-storage.screen = storage.screen || undefined;
-storage.money = storage.money || 0;
-storage.time = storage.time || new Date(2125, 10, 1, 10, 30, 0).getTime();
-storage.prestige = storage.prestige || 100;
 
 export const tickTasks = [];
 
@@ -25,7 +19,7 @@ setInterval(function () {
         tickTask$item.trigger();
     });
 
-}, _speedTime(50));
+}, 50);
 
 export const gui = {}
 

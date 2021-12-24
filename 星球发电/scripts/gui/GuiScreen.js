@@ -1,13 +1,17 @@
 import {_speed, _speedTime} from "../util/Algorithm.js";
-import {$background, $body, screenData, soundPlayer$bigstar, storage, tickTasks} from "../Init.js";
+import {$background, $body, screenData, soundPlayer$bigstar, tickTasks} from "../Init.js";
 import {showTasks} from "../task/TaskManager.js";
 import {showSettings} from "../Settings.js";
-import {creatElement, slideAndFadeIn, slideAndFadeOut} from "../util/Opera.js";
+import {creatElement} from "../util/Opera.js";
 import {TickTask} from "../Tick.js";
+import {storage} from "../SavedData.js";
+
+//todo
 
 export class Dialog {
     constructor(content = "", canBeClosed = false) {
         const dialog$this = this;
+        dialog$this.color()
         dialog$this.$dialogBox = creatElement("div")
         dialog$this.$dialogBoxBackground = creatElement("div")
         dialog$this.$dialogBoxContinue = creatElement("div")
@@ -31,8 +35,8 @@ export class Dialog {
     show(callback) {
         const dialog$this = this;
         dialog$this.callback = callback;
-        dialog$this.$dialogBoxBackground.css({"z-index": maxZIndex++}).fadeIn(_speedTime(200), function () {
-            dialog$this.$divCenter.css({"z-index": maxZIndex++}).fadeIn(_speedTime(200), function () {
+        dialog$this.$dialogBoxBackground.css({"z-index": maxZIndex++}).fadeIn(200, function () {
+            dialog$this.$divCenter.css({"z-index": maxZIndex++}).fadeIn(200, function () {
                 dialog$this.update()
             });
         });
@@ -44,7 +48,7 @@ export class Dialog {
             dialog$this.callback = callback;
         }
         dialog$this.$divCenter.fadeOut(200, function () {
-            dialog$this.$dialogBoxBackground.fadeOut(_speedTime(200), function () {
+            dialog$this.$dialogBoxBackground.fadeOut(200, function () {
                 dialog$this.$dialogBoxContinue.hide()
                 if (dialog$this.callback) {
                     dialog$this.callback();
@@ -56,7 +60,9 @@ export class Dialog {
     update() {
         const dialog$this = this;
         if (dialog$this.canBeClosed) {
-            slideAndFadeIn(dialog$this.$dialogBoxContinue, 500)
+            if (dialog$this.$dialogBoxContinue.is(":hidden")) {
+                dialog$this.$dialogBoxContinue.slideAndFadeIn(500);
+            }
             dialog$this.$dialogBoxBackground.click(function () {
                 dialog$this.hide();
             })
@@ -64,8 +70,35 @@ export class Dialog {
                 dialog$this.hide();
             })
         } else {
-            slideAndFadeOut(dialog$this.$dialogBoxContinue, 500)
+            if (dialog$this.$dialogBoxContinue.is(":visible")) {
+                dialog$this.$dialogBoxContinue.slideAndFadeOut(500);
+            }
+            dialog$this.$dialogBoxContinue.unbind("click");
+            dialog$this.$dialogBoxBackground.unbind("click");
         }
+
+    }
+
+    #updateStyle() {
+        const dialog$this = this;
+        const color = dialog$this.color;
+        dialog$this.styles =
+            `/*position: fixed;*/
+        padding: 5vw;
+        /*left: 50%;*/
+        /*top: 50%;*/
+        /*transform: translate(-50%, -50%);*/
+        border-radius: 5vw;
+        background-color: blue;
+        color: white;
+        font-size: 2vw;
+        box-shadow: 1vw 1vw 1vw rgba(0, 0, 255, 0.5);`
+    }
+
+    changeColor(color) {
+        const button$this = this;
+        button$this.color = color;
+        button$this.update();
     }
 
 }
@@ -188,8 +221,8 @@ export class Screen {
     changeTo(callback) {
         const screen$this = this;
         if (screenData.present) {
-            screenData.present.$screenBox.fadeOut(_speedTime(500), function () {
-                screen$this.$screenBox.css({"z-index": maxZIndex++}).fadeIn(_speedTime(500), function () {
+            screenData.present.$screenBox.fadeOut(500, function () {
+                screen$this.$screenBox.css({"z-index": maxZIndex++}).fadeIn(500, function () {
                     if (callback) {
                         callback()
                     }
@@ -197,7 +230,7 @@ export class Screen {
             })
             screenData.present = screen$this;
         } else {
-            screen$this.$screenBox.css({"z-index": maxZIndex++}).fadeIn(_speedTime(500), function () {
+            screen$this.$screenBox.css({"z-index": maxZIndex++}).fadeIn(500, function () {
                 if (callback) {
                     callback()
                 }

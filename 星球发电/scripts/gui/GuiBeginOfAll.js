@@ -1,9 +1,10 @@
 import {Dialog, Screen} from "./GuiScreen.js";
-import {soundPlayer$nightClothes, soundPlayer$planetPower, storage} from "../Init.js";
+import {soundPlayer$nightClothes, soundPlayer$planetPower} from "../Init.js";
 import {_speedTime} from "../util/Algorithm.js";
 import {LONG_CONTENTS} from "../Reference.js";
 import {screen$homeOfEarth} from "./GuiEarthHome.js";
 import {title} from "../util/Opera.js";
+import {storage} from "../SavedData.js";
 
 export const screen$beginOfAll = new Screen();
 
@@ -27,8 +28,8 @@ export function begin() {
                             dialog$television.update()
                         });
                     }, 1000, 2000, 1000)
-                }, _speedTime(2000))
+                }, 2000)
             }, 1000, 2000, 1000,)
-        }, _speedTime(2000))
+        }, 2000)
     }, undefined, 2000, undefined)
 }
