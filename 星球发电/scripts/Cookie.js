@@ -12,8 +12,8 @@ export function getCookie(cname) {
     const ca = document.cookie.split(';');
     for (let i = 0; i < ca.length; i++) {
         let c = ca[i];
-        while (c.charAt(0) == ' ') c = c.substring(1);
-        if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+        while (c.charAt(0) === ' ') c = c.substring(1);
+        if (c.indexOf(name) !== -1) return c.substring(name.length, c.length);
     }
     return "";
 }
@@ -26,7 +26,7 @@ export function clearCookie(name) {
 export function clearAllCookie() {
     const keys = document.cookie.match(/[^ =;]+(?=\=)/g);
     if (keys) {
-        for (var i = keys.length; i--;) {
+        for (let i = keys.length; i--;) {
             document.cookie = keys[i] + '=0;path=/;expires=' + new Date(0).toUTCString();//清除当前域名下的,例如：m.kevis.com
         }
     }

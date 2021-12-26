@@ -1,4 +1,4 @@
-import {$body} from "../Init.js";
+import {$body} from "../init/Init.js";
 import {_speedTime} from "./Algorithm.js";
 
 export function title(content, callback, timeIn = 500, timeDelay = 1000, timeOut = 500) {
@@ -22,6 +22,7 @@ export function title(content, callback, timeIn = 500, timeDelay = 1000, timeOut
 export function creatElement(name) {
     return $(`<${name} />`);
 }
+
 export function clearObject(object) {
     for (const key in object) {
         delete object[key];

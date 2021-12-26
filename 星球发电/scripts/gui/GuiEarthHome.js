@@ -1,4 +1,4 @@
-import {Screen, ScreenMap} from "./GuiScreen.js";
+import {Screen, ScreenMap} from "./util/GuiScreen.js";
 
 export const screen$homeOfEarth = new ScreenMap();
 screen$homeOfEarth.name = "地球"

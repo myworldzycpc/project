@@ -10,10 +10,6 @@
     background: linear-gradient(45deg, black, #2a012a)
 }
 
-.dialogBox {
-
-}
-
 .dialogBoxBackground {
     position: fixed;
     height: 100%;

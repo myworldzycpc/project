@@ -1,120 +1,41 @@
-import {_speed, _speedTime} from "../util/Algorithm.js";
-import {$background, $body, screenData, soundPlayer$bigstar, tickTasks} from "../Init.js";
-import {showTasks} from "../task/TaskManager.js";
-import {showSettings} from "../Settings.js";
-import {creatElement} from "../util/Opera.js";
-import {TickTask} from "../Tick.js";
-import {storage} from "../SavedData.js";
+import {_speed, _speedTime} from "../../util/Algorithm.js";
+import {$background, $body, screenData, soundPlayer$bigstar, tickTasks} from "../../init/Init.js";
+import {showTasks} from "../../task/TaskManager.js";
+import {showSettings} from "../../Settings.js";
+import {creatElement} from "../../util/Opera.js";
+import {TickTask} from "../../Tick.js";
+import {storage} from "../../SavedData.js";
 
 //todo
 
-export class Dialog {
-    constructor(content = "", canBeClosed = false) {
-        const dialog$this = this;
-        dialog$this.color()
-        dialog$this.$dialogBox = creatElement("div")
-        dialog$this.$dialogBoxBackground = creatElement("div")
-        dialog$this.$dialogBoxContinue = creatElement("div")
-            .css({"font-size": "2vw", "text-align": "center", "line-height": "10vw"})
-            .html("点击空白处继续...")
-            .hide()
-        dialog$this.$dialogBox.addClass("dialogBox");
-        dialog$this.$dialogBoxBackground.addClass("dialogBoxBackground");
-        dialog$this.$dialogBox.html(content);
-        dialog$this.$divCenter = creatElement("div")
-            .append(dialog$this.$dialogBox)
-            .append(dialog$this.$dialogBoxContinue)
-            .addClass("divCenter")
-        dialog$this.canBeClosed = canBeClosed;
-        $body.append(dialog$this.$dialogBoxBackground);
-        $body.append(dialog$this.$divCenter);
-        dialog$this.$dialogBoxBackground.hide();
-        dialog$this.$divCenter.hide()
-    };
-
-    show(callback) {
-        const dialog$this = this;
-        dialog$this.callback = callback;
-        dialog$this.$dialogBoxBackground.css({"z-index": maxZIndex++}).fadeIn(200, function () {
-            dialog$this.$divCenter.css({"z-index": maxZIndex++}).fadeIn(200, function () {
-                dialog$this.update()
-            });
-        });
-    };
-
-    hide(callback) {
-        const dialog$this = this;
-        if (callback) {
-            dialog$this.callback = callback;
-        }
-        dialog$this.$divCenter.fadeOut(200, function () {
-            dialog$this.$dialogBoxBackground.fadeOut(200, function () {
-                dialog$this.$dialogBoxContinue.hide()
-                if (dialog$this.callback) {
-                    dialog$this.callback();
-                }
-            });
-        });
-    }
-
-    update() {
-        const dialog$this = this;
-        if (dialog$this.canBeClosed) {
-            if (dialog$this.$dialogBoxContinue.is(":hidden")) {
-                dialog$this.$dialogBoxContinue.slideAndFadeIn(500);
-            }
-            dialog$this.$dialogBoxBackground.click(function () {
-                dialog$this.hide();
-            })
-            dialog$this.$dialogBoxContinue.click(function () {
-                dialog$this.hide();
-            })
-        } else {
-            if (dialog$this.$dialogBoxContinue.is(":visible")) {
-                dialog$this.$dialogBoxContinue.slideAndFadeOut(500);
-            }
-            dialog$this.$dialogBoxContinue.unbind("click");
-            dialog$this.$dialogBoxBackground.unbind("click");
-        }
-
-    }
-
-    #updateStyle() {
-        const dialog$this = this;
-        const color = dialog$this.color;
-        dialog$this.styles =
-            `/*position: fixed;*/
-        padding: 5vw;
-        /*left: 50%;*/
-        /*top: 50%;*/
-        /*transform: translate(-50%, -50%);*/
-        border-radius: 5vw;
-        background-color: blue;
-        color: white;
-        font-size: 2vw;
-        box-shadow: 1vw 1vw 1vw rgba(0, 0, 255, 0.5);`
-    }
-
-    changeColor(color) {
-        const button$this = this;
-        button$this.color = color;
-        button$this.update();
-    }
-
-}
-
+/**
+ * 此类可以实现一个按钮。
+ */
 export class Button {
-    constructor($parent = $background, content = "", action = function () {
-    }, color = [255, 0, 0]) {
+    /**
+     *
+     * @param {*|{$parent: *|HTMLElement|jQuery, action: function|undefined, color: number[], content: string, soundEffect: SoundPlayer}}options
+     */
+    constructor(options = {}) {
         const button$this = this;
+        options = $.extend({
+            $parent: $background,
+            action: undefined,
+            color: [255, 0, 0],
+            content: "",
+            soundEffect: soundPlayer$bigstar
+        }, options);
+
         button$this.$button = creatElement("button")
-        button$this.$button.html(content);
-        $parent.append(this.$button);
+        button$this.$button.html(options.content);
+        options.$parent.append(this.$button);
         button$this.$button.click(function () {
-            soundPlayer$bigstar.play(undefined, undefined, 0.3);
-            action();
+            options.soundEffect.play();
+            if (options.action) {
+                options.action();
+            }
         })
-        button$this.color = color;
+        button$this.color = options.color;
         button$this.pressed = false;
         button$this.hovered = false;
 
@@ -257,30 +178,34 @@ export class ScreenMap extends Screen {
             "top": "0",
             "left": "0"
         })
-        const button$task = new Button($topLeft, "任务", function () {
-            showTasks();
+        const button$task = new Button({
+            $parent: $topLeft, content: "任务", action: function () {
+                showTasks();
+            }
         })
         $topLeft.append(creatElement('br'));
-        const button$personnelMatters = new Button($topLeft, "人事")
+        const button$personnelMatters = new Button({$parent: $topLeft, content: "人事"})
         $topLeft.append(creatElement('br'));
-        const button$technology = new Button($topLeft, "技术")
+        const button$technology = new Button({$parent: $topLeft, content: "技术"})
 
         const $bottomLeft = creatElement("div").css({
             "position": "fixed",
             "bottom": "0",
             "left": "0"
         })
-        const button$store = new Button($bottomLeft, "商店")
-        const button$construct = new Button($bottomLeft, "建设")
-
+        const button$store = new Button({$parent: $bottomLeft, content: "商店"})
         const $bottomRight = creatElement("div").css({
             "position": "fixed",
             "bottom": "0",
             "right": "0"
         })
-        const button$celestialMap = new Button($bottomRight, "星图")
-        const button$setting = new Button($bottomRight, "设置", function () {
-            showSettings()
+
+        const button$construct = new Button({$parent: $bottomLeft, content: "建设"})
+        const button$celestialMap = new Button({$parent: $bottomRight, content: "星图"})
+        const button$setting = new Button({
+            $parent: $bottomRight, content: "设置", action: function () {
+                showSettings()
+            }
         })
 
         const $topRight = creatElement("div").css({
@@ -297,7 +222,7 @@ export class ScreenMap extends Screen {
             "font-size": "2vw",
         })
         $topRight.append(screenMap$this.$infos);
-        const button$spaceship = new Button($topRight, "宇宙飞船")
+        const button$spaceship = new Button({$parent: $topRight, content: "宇宙飞船"})
 
         screenMap$this.$screenBox
             .append($topLeft)
@@ -327,8 +252,9 @@ export class ScreenMap extends Screen {
 }
 
 export class SoundPlayer {
-    constructor(src) {
+    constructor(src, startTime = 0.0) {
         const soundPlayer$this = this;
+        soundPlayer$this.startTime = startTime;
         //<video class="hide" id="sound" src="破苍穹.mp3" preload="auto"></video>
         soundPlayer$this.$video = creatElement("video")
             .addClass("hide")
@@ -341,7 +267,7 @@ export class SoundPlayer {
         const soundPlayer$this = this;
         soundPlayer$this.$video[0].volume = volume;
         soundPlayer$this.$video[0].playbackRate = _speed(playbackRate);
-        soundPlayer$this.$video[0].currentTime = startTime;
+        soundPlayer$this.$video[0].currentTime = soundPlayer$this.startTime + startTime;
         soundPlayer$this.$video[0].loop = loop;
 
         soundPlayer$this.$video[0].play();

@@ -1,14 +1,15 @@
-import {Dialog, Screen} from "./GuiScreen.js";
-import {soundPlayer$nightClothes, soundPlayer$planetPower} from "../Init.js";
+import {Screen} from "./util/GuiScreen.js";
+import {soundPlayer$nightClothes, soundPlayer$planetPower} from "../init/Init.js";
 import {_speedTime} from "../util/Algorithm.js";
 import {LONG_CONTENTS} from "../Reference.js";
 import {screen$homeOfEarth} from "./GuiEarthHome.js";
 import {title} from "../util/Opera.js";
 import {storage} from "../SavedData.js";
+import {Dialog} from "./util/GuiDialog.js";
 
 export const screen$beginOfAll = new Screen();
 
-const dialog$television = new Dialog(LONG_CONTENTS.newsOfStart, false)
+const dialog$television = new Dialog({content: LONG_CONTENTS.newsOfStart, canBeClosed: false})
 dialog$television.$dialogBox.css({"font-size": "1.5vw"});
 
 export function begin() {

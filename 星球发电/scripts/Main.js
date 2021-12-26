@@ -1,13 +1,12 @@
-import * as Init from "./Init.js";
+import * as Init from "./init/Init.js";
 import * as Cookie from "./Cookie.js"
 import * as GuiStartGame from "./gui/GuiStartGame.js";
-import "./gui/Screens.js";
-import "./additional/AdditionalManager.js"
 
 window.Init = Init;
 window.Cookie = Cookie;
 
 function main() {
+    Init.Init();
     GuiStartGame.screen$startGame.changeTo();
 }
 
