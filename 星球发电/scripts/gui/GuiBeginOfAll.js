@@ -1,4 +1,3 @@
-import {Screen} from "./util/GuiScreen.js";
 import {soundPlayer$nightClothes, soundPlayer$planetPower} from "../init/Init.js";
 import {_speedTime} from "../util/Algorithm.js";
 import {LONG_CONTENTS} from "../Reference.js";
@@ -6,6 +5,7 @@ import {screen$homeOfEarth} from "./GuiEarthHome.js";
 import {title} from "../util/Opera.js";
 import {storage} from "../SavedData.js";
 import {Dialog} from "./util/GuiDialog.js";
+import {Screen} from "./util/GuiScreen.js";
 
 export const screen$beginOfAll = new Screen();
 

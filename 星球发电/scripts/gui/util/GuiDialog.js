@@ -1,5 +1,7 @@
-import {creatElement} from "../../util/Opera.js";
+import {clearObject, creatElement} from "../../util/Opera.js";
 import {$body} from "../../init/Init.js";
+import {Button} from "./GuiBase.js";
+import {storage} from "../../SavedData.js";
 
 /**
  * 此类可以实现一个居中悬浮的对话框。
@@ -105,4 +107,41 @@ export class Dialog {
         button$this.#updateStyle();
     }
 
+}
+
+export class DialogYesNo extends Dialog {
+    /**
+     *
+     * @param {*|{content: string, canBeClosed: boolean, color: number[], actionYes: function|undefined, actionNo: function|undefined}}options
+     */
+    constructor(options = {}) {
+        const content = options.content;
+        options.content = "";
+
+        super(options);
+
+        const dialog$this = this;
+        dialog$this.$dialogBox.append(creatElement("span").html(content))
+        dialog$this.$dialogBox.append(creatElement("br"));
+        const $divButtons = creatElement("div")
+            .css({"text-align": "center"})
+        const button$yes = new Button({
+            $parent: $divButtons, content: "确定", action: function () {
+                dialog$this.hide(function () {
+                    if (options.actionYes) {
+                        options.actionYes();
+                    }
+                })
+            }
+        })
+        const button$no = new Button({
+            $parent: $divButtons, content: "取消", color: [127, 127, 127], action: function () {
+                dialog$this.hide()
+                if (options.actionNo) {
+                    options.actionNo();
+                }
+            }
+        })
+        dialog$this.$dialogBox.append($divButtons);
+    }
 }

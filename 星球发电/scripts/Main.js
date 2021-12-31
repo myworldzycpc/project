@@ -12,4 +12,5 @@ function main() {
 
 $(function () {
     main();
+
 });

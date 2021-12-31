@@ -1,5 +1,5 @@
 import * as Cookie from "../Cookie.js"
-import {SoundPlayer} from "../gui/util/GuiScreen.js";
+import {SoundPlayer} from "../gui/util/GuiBase.js";
 import {creatElement} from "../util/Opera.js";
 import {_speedTime} from "../util/Algorithm.js";
 import {storage} from "../SavedData.js";
