@@ -4,10 +4,12 @@ import {showTasks} from "../../task/TaskManager.js";
 import {showSettings} from "../../Settings.js";
 import {TickTask} from "../../Tick.js";
 import {storage} from "../../SavedData.js";
-import {Button} from "./GuiBase.js";
+import {Button} from "./GuiOther.js";
+import {GuiBase} from "./GuiBase.js";
 
-export class Screen {
+export class Screen extends GuiBase {
     constructor() {
+        super();
         const screen$this = this;
         screen$this.$screenBox = creatElement("div");
         $body.append(screen$this.$screenBox);

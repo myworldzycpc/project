@@ -1,5 +1,5 @@
 import {compare} from "../util/Algorithm.js";
-import {Button} from "./util/GuiBase.js";
+import {Button} from "./util/GuiOther.js";
 import {soundPlayer$bigstar, soundPlayer$nightClothes} from "../init/Init.js";
 import {begin, screen$beginOfAll} from "./GuiBeginOfAll.js";
 import {screen$homeOfEarth} from "./GuiEarthHome.js";

@@ -12,5 +12,11 @@ function main() {
 
 $(function () {
     main();
+    try {
+    } catch (err) {
+        let txt = "出现了一个错误。\n";
+        txt += "错误描述：" + err.message + "\n";
+        alert(txt);
+    }
 
 });

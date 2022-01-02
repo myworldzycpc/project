@@ -1,12 +1,14 @@
 import {clearObject, creatElement} from "../../util/Opera.js";
-import {$body} from "../../init/Init.js";
-import {Button} from "./GuiBase.js";
+import {$body, screenData} from "../../init/Init.js";
+import {Button} from "./GuiOther.js";
 import {storage} from "../../SavedData.js";
+import {debugInfo} from "../../Debug.js";
+import {GuiBase} from "./GuiBase.js";
 
 /**
  * 此类可以实现一个居中悬浮的对话框。
  */
-export class Dialog {
+export class Dialog extends GuiBase {
     /**
      *
      * @param {*|{content: string, canBeClosed: boolean, color: number[]}}options
@@ -14,6 +16,7 @@ export class Dialog {
      * @param options.canBeClosed 此对话框是否可以被关闭（通过点击空白处关闭，即使为false也可以通过{@link hide hide()}方法关闭。
      */
     constructor(options = {}) {
+        super();
         //content = "", canBeClosed = false
         const dialog$this = this;
         options = $.extend({content: "", canBeClosed: false, color: [0, 0, 255]}, options);
@@ -41,6 +44,7 @@ export class Dialog {
 
     show(callback) {
         const dialog$this = this;
+        screenData.dialogLevel++;
         dialog$this.callback = callback;
         dialog$this.$dialogBoxBackground.css({"z-index": maxZIndex++}).fadeIn(200, function () {
             dialog$this.$divCenter.css({"z-index": maxZIndex++}).fadeIn(200, function () {
@@ -57,6 +61,8 @@ export class Dialog {
         dialog$this.$divCenter.fadeOut(200, function () {
             dialog$this.$dialogBoxBackground.fadeOut(200, function () {
                 dialog$this.$dialogBoxContinue.hide()
+                debugInfo("hide")
+                screenData.dialogLevel--;
                 if (dialog$this.callback) {
                     dialog$this.callback();
                 }

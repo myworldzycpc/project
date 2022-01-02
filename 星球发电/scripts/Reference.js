@@ -17,3 +17,4 @@ export const LONG_CONTENTS = {
 export const TIME_SPEED = 1;
 
 export const DEBUG_MODE = true;
+

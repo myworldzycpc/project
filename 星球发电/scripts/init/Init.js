@@ -1,12 +1,14 @@
 import * as Cookie from "../Cookie.js"
-import {SoundPlayer} from "../gui/util/GuiBase.js";
+import {SoundPlayer} from "../gui/util/GuiOther.js";
 import {creatElement} from "../util/Opera.js";
 import {_speedTime} from "../util/Algorithm.js";
 import {storage} from "../SavedData.js";
 import {AdditionalManager} from "./additional/AdditionalManager.js";
+import {mainLoop} from "../gui/loop/MainLoop.js";
 
 
 export const screenData = {
+    dialogLevel: 0, // todo: 出现多次hide
     present: undefined,
     all: [],
 }
@@ -31,10 +33,7 @@ export function Init() {
     AdditionalManager();
     window.maxZIndex = 10;
     setInterval(function () {
-        Cookie.setCookie("data", btoa(JSON.stringify(storage)));
-        tickTasks.forEach(tickTask$item => {
-            tickTask$item.trigger();
-        });
+        mainLoop();
 
     }, 50);
 }
