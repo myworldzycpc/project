@@ -13,7 +13,13 @@ export const screen$startGame = new Screen();
 
 const $divStartGame = creatElement("div")
     .css({"text-align": "center"})
-    .addClass("divCenter")
+    // .addClass("divCenter")
+    .css({
+        "position": "fixed",
+        "left": "50%",
+        "top": "50%",
+        "transform": "translate(-50%, -50%)",
+    })
     .append(creatElement("span").html("星球发电").css({"font-size": "10vw"}))
     .append(creatElement('br'))
     .append(creatElement("span").html("Planetary Power Generation").css({"font-size": "2vw"}))

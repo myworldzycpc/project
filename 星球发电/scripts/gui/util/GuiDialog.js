@@ -11,9 +11,10 @@ import {GuiBase} from "./GuiBase.js";
 export class Dialog extends GuiBase {
     /**
      *
-     * @param {*|{content: string, canBeClosed: boolean, color: number[]}}options
-     * @param options.content 对话框显示的内容
-     * @param options.canBeClosed 此对话框是否可以被关闭（通过点击空白处关闭，即使为false也可以通过{@link hide hide()}方法关闭。
+     * @param {*}options
+     * @param {string}options.content 对话框显示的内容
+     * @param {boolean}options.canBeClosed 此对话框是否可以被关闭（通过点击空白处关闭，即使为false也可以通过{@link hide hide()}方法关闭）。
+     * @param {number[]}options.color 对话框的颜色
      */
     constructor(options = {}) {
         super();
@@ -34,7 +35,12 @@ export class Dialog extends GuiBase {
         dialog$this.$divCenter = creatElement("div")
             .append(dialog$this.$dialogBox)
             .append(dialog$this.$dialogBoxContinue)
-            .addClass("divCenter")
+            .css({
+                "position": "fixed",
+                "left": "50%",
+                "top": "50%",
+                "transform": "translate(-50%, -50%)",
+            })
         dialog$this.canBeClosed = options.canBeClosed;
         $body.append(dialog$this.$dialogBoxBackground);
         $body.append(dialog$this.$divCenter);
@@ -47,9 +53,16 @@ export class Dialog extends GuiBase {
         screenData.dialogLevel++;
         dialog$this.callback = callback;
         dialog$this.$dialogBoxBackground.css({"z-index": maxZIndex++}).fadeIn(200, function () {
-            dialog$this.$divCenter.css({"z-index": maxZIndex++}).fadeIn(200, function () {
-                dialog$this.update()
-            });
+            dialog$this.$divCenter
+                .show()
+                .css({
+                    "z-index": maxZIndex++,
+                    "top": "25%",
+                    "opacity": "0"
+                })
+                .animate({"top": "50%", "opacity": "1"}, 200, function () {
+                    dialog$this.update()
+                });
         });
     };
 

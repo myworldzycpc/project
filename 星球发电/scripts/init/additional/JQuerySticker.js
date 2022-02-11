@@ -1,4 +1,5 @@
 import {_speedTime} from "../../util/Algorithm.js";
+import {ZIndexes} from "../Init.js";
 
 export function JQuerySticker() {
     /**
@@ -21,6 +22,15 @@ export function JQuerySticker() {
                 $this.hide().css({'opacity': '1'})
             })
         })
+    }
+
+    $.prototype.bringToAllFront = function () {
+        const $this = this;
+        for (const index in ZIndexes) {
+            if (ZIndexes[index] === $this) {
+                
+            }
+        }
     }
 
 }

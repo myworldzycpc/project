@@ -18,7 +18,7 @@ const dialog$clearAll = new DialogYesNo({
     }
 });
 
-const floating$settings = new Floating();
+const floating$settings = new Floating({canBeClosed: true});
 const button$clearAll = new Button({
     $parent: floating$settings.$floatingBox, content: "清空所有数据", action: function () {
         dialog$clearAll.show();

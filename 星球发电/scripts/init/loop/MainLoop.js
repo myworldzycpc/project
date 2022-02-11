@@ -1,6 +1,6 @@
 import * as Cookie from "../../Cookie.js";
 import {storage} from "../../SavedData.js";
-import {screenData, tickTasks} from "../../init/Init.js";
+import {screenData, tickTasks} from "../Init.js";
 import {debugInfo} from "../../Debug.js";
 
 export function mainLoop() {
