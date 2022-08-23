@@ -14,7 +14,7 @@ export const LONG_CONTENTS = {
         "2125年10月1日",
 }
 
-export const TIME_SPEED = 2;
+export const TIME_SPEED = 1;
 
 export const DEBUG_MODE = true;
 

@@ -164,3 +164,111 @@ export class SoundPlayer extends GuiBase {
 
 }
 
+export class Entry extends GuiBase {
+
+    constructor(options = {}) {
+        super();
+        const entry$this = this;
+        options = $.extend({
+            $parent: $background,
+            action: undefined,
+            color: [255, 255, 255],
+            content: "",
+            soundEffect: soundPlayer$bigstar
+        }, options);
+
+        entry$this.$input = creatElement("input")
+        entry$this.$input.attr("spellcheck", "false")
+        entry$this.setValue(options.content);
+        options.$parent.append(this.$input);
+        entry$this.$input.change(function () {
+            options.soundEffect.play();
+            if (options.action) {
+                options.action(entry$this);
+            }
+        })
+        entry$this.color = options.color;
+        entry$this.pressed = false;
+        entry$this.hovered = false;
+
+        entry$this.#updateStyle()
+        entry$this.$input.hover(
+            function () {
+                entry$this.hovered = true;
+                entry$this.#updateStyle()
+            },
+            function () {
+                entry$this.hovered = false;
+                entry$this.pressed = false;
+                entry$this.#updateStyle()
+            }
+        );
+        entry$this.$input.mousedown(function () {
+            entry$this.pressed = true;
+            entry$this.#updateStyle()
+
+        });
+        entry$this.$input.mouseup(function () {
+            entry$this.pressed = false;
+            entry$this.#updateStyle()
+        });
+    };
+
+    #updateStyle() {
+        const entry$this = this;
+        const color = entry$this.color;
+        entry$this.styles = {
+            "normal": {
+                "padding": "1vw",
+                "border-radius": "1vw",
+                "background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`,
+                "margin": "1vw",
+                "color": "black",
+                "font-size": "2vw",
+                "border": "none",
+                "filter": "none",
+                "box-shadow": "none",
+                "transition": `${_speedTime(0.2)}s`,
+            },
+            "hover": {
+                "padding": "1vw",
+                "border-radius": "1vw",
+                "background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`,
+                "margin": "1vw",
+                "color": "black",
+                "font-size": "2vw",
+                "border": "none",
+                "filter": "none",
+                "box-shadow": `0 0 1vw rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.5)`,
+                "transition": `${_speedTime(0.2)}s`,
+            },
+            "active": {
+                "padding": "1vw",
+                "border-radius": "1vw",
+                "background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`,
+                "margin": "1vw",
+                "color": "black",
+                "font-size": "2vw",
+                "border": "none",
+                "filter": "brightness(0.8)",
+                "box-shadow": `0 0 1vw rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.5)`,
+                "transition": `${_speedTime(0.2)}s`,
+            }
+        }
+        if (entry$this.pressed) {
+            entry$this.$input.css(entry$this.styles.active);
+        } else if (entry$this.hovered) {
+            entry$this.$input.css(entry$this.styles.hover);
+        } else {
+            entry$this.$input.css(entry$this.styles.normal);
+        }
+    }
+
+    getValue() {
+        return this.$input.val()
+    }
+
+    setValue(value) {
+        return this.$input.val(value)
+    }
+}

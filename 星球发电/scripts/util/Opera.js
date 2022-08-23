@@ -24,6 +24,11 @@ export function title(content, callback, timeIn = 500, timeDelay = 1000, timeOut
     })
 }
 
+/**
+ *
+ * @param name 元素标签名称
+ * @return {jQuery|*}
+ */
 export function creatElement(name) {
     return $(`<${name} />`);
 }

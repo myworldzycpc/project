@@ -1,4 +1,4 @@
-import {Button} from "./gui/util/GuiOther.js";
+import {Button, Entry} from "./gui/util/GuiOther.js";
 import {clearCookie} from "./Cookie.js";
 import {clearObject, creatElement} from "./util/Opera.js";
 import {storage} from "./SavedData.js";
@@ -22,6 +22,27 @@ const floating$settings = new Floating({canBeClosed: true});
 const button$clearAll = new Button({
     $parent: floating$settings.$floatingBox, content: "清空所有数据", action: function () {
         dialog$clearAll.show();
+    }
+})
+
+floating$settings.$floatingBox.append(creatElement('br'));
+
+const button$closeMusic = new Button({
+    $parent: floating$settings.$floatingBox, content: "关闭音乐", action: function () {
+    }
+})
+
+floating$settings.$floatingBox.append(creatElement('br'));
+
+const button$closeSound = new Button({
+    $parent: floating$settings.$floatingBox, content: "关闭声音", action: function () {
+    }
+})
+
+floating$settings.$floatingBox.append(creatElement('br'));
+
+const entry$speed = new Entry({
+    $parent: floating$settings.$floatingBox, content: "2", action: function () {
     }
 })
 
