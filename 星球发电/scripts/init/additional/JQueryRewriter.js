@@ -1,5 +1,5 @@
-import {_speedTime} from "../../util/Algorithm.js";
-import {_speed} from "../../util/Algorithm.js";
+import {calculatedSpeedTime} from "../../util/Algorithm.js";
+import {calculatedSpeed} from "../../util/Algorithm.js";
 
 export function JQueryRewriter() {
     $.prototype._fadeOut = $.prototype.fadeOut;
@@ -10,7 +10,7 @@ export function JQueryRewriter() {
      */
     $.prototype.fadeOut = function (time, ...args) {
         const $this = this;
-        return $this._fadeOut(_speedTime(time), ...args);
+        return $this._fadeOut(calculatedSpeedTime(time), ...args);
     }
 
     $.prototype._fadeIn = $.prototype.fadeIn;
@@ -21,7 +21,7 @@ export function JQueryRewriter() {
      */
     $.prototype.fadeIn = function (time, ...args) {
         const $this = this;
-        return $this._fadeIn(_speedTime(time), ...args);
+        return $this._fadeIn(calculatedSpeedTime(time), ...args);
     }
 
     $.prototype._slideUp = $.prototype.slideUp;
@@ -32,7 +32,7 @@ export function JQueryRewriter() {
      */
     $.prototype.slideUp = function (time, ...args) {
         const $this = this;
-        return $this._slideUp(_speedTime(time), ...args);
+        return $this._slideUp(calculatedSpeedTime(time), ...args);
     }
 
     $.prototype._slideDown = $.prototype.slideDown;
@@ -43,19 +43,19 @@ export function JQueryRewriter() {
      */
     $.prototype.slideDown = function (time, ...args) {
         const $this = this;
-        return $this._slideDown(_speedTime(time), ...args);
+        return $this._slideDown(calculatedSpeedTime(time), ...args);
     }
 
     $.prototype._animate = $.prototype.animate;
     /**
-     * 请用{@link _speedTime _speedTime()}函数封装你的css中的transition属性
+     * 请用{@link calculatedSpeedTime _speedTime()}函数封装你的css中的transition属性
      * @param prop
      * @param {number}speed
      * @param args
      */
     $.prototype.animate = function (prop, speed, ...args) {
         const $this = this;
-        return $this._animate(prop, _speedTime(speed), ...args);
+        return $this._animate(prop, calculatedSpeedTime(speed), ...args);
 
     }
 }

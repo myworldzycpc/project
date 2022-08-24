@@ -1,6 +1,6 @@
 import {clearObject, creatElement} from "../../util/Opera.js";
 import {$body, screenData} from "../../init/Init.js";
-import {Button} from "./GuiOther.js";
+import {Button} from "./GuiWidgets.js";
 import {storage} from "../../SavedData.js";
 import {debugInfo} from "../../Debug.js";
 import {GuiBase} from "./GuiBase.js";
@@ -26,7 +26,7 @@ export class Dialog extends GuiBase {
         dialog$this.$dialogBox = creatElement("div")
         dialog$this.$dialogBoxBackground = creatElement("div")
         dialog$this.$dialogBoxContinue = creatElement("div")
-            .css({"font-size": "2vw", "text-align": "center", "line-height": "10vw"})
+            .css({"font-size": "40px", "text-align": "center", "line-height": "200px"})
             .html("点击空白处继续...")
             .hide()
         dialog$this.#updateStyle();
@@ -109,12 +109,12 @@ export class Dialog extends GuiBase {
         const dialog$this = this;
         const color = dialog$this.color;
         dialog$this.styles = {
-            "padding": "5vw",
-            "border-radius": "5vw",
+            "padding": "100px",
+            "border-radius": "100px",
             "background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`,
             "color": "white",
-            "font-size": "2vw",
-            "box-shadow": `1vw 1vw 1vw rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.5)`,
+            "font-size": "40px",
+            "box-shadow": `20px 20px 20px rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.5)`,
         }
         dialog$this.$dialogBox.css(dialog$this.styles);
 

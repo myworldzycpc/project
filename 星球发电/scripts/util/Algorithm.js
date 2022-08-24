@@ -1,15 +1,16 @@
 import * as Reference from "../Reference.js";
+import {storage} from "../SavedData.js";
 
-export function _speedTime(time) {
-    return time / Reference.TIME_SPEED;
+export function calculatedSpeedTime(time) {
+    return time / calculatedSpeed(1);
 }
 
 /**
  * @param {number} speed
  * @return number
  */
-export function _speed(speed) {
-    return speed * Reference.TIME_SPEED;
+export function calculatedSpeed(speed) {
+    return speed * storage.speed;
 }
 
 /**

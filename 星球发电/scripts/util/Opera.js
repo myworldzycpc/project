@@ -1,9 +1,9 @@
 import {$body} from "../init/Init.js";
-import {_speedTime} from "./Algorithm.js";
+import {calculatedSpeedTime} from "./Algorithm.js";
 
 export function title(content, callback, timeIn = 500, timeDelay = 1000, timeOut = 500) {
     const $div = creatElement("div")
-        .css({"text-align": "center", "z-index": maxZIndex++, "font-size": "2vw"})
+        .css({"text-align": "center", "z-index": maxZIndex++, "font-size": "40px"})
         .css({
             "position": "fixed",
             "left": "50%",

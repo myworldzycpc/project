@@ -1,4 +1,4 @@
-import {_speedTime} from "../../util/Algorithm.js";
+import {calculatedSpeedTime} from "../../util/Algorithm.js";
 import {ZIndexes} from "../Init.js";
 
 export function JQuerySticker() {

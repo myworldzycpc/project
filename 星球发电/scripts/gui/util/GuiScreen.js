@@ -4,7 +4,7 @@ import {showTasks} from "../../task/TaskManager.js";
 import {showSettings} from "../../Settings.js";
 import {TickTask} from "../../Tick.js";
 import {storage} from "../../SavedData.js";
-import {Button} from "./GuiOther.js";
+import {Button} from "./GuiWidgets.js";
 import {GuiBase} from "./GuiBase.js";
 
 export class Screen extends GuiBase {
@@ -94,12 +94,12 @@ export class ScreenMap extends Screen {
             "right": "0"
         })
         screenMap$this.$infos = creatElement("span").css({
-            "padding": "1vw",
-            "border-radius": "1vw",
+            "padding": "20px",
+            "border-radius": "20px",
             "background-color": `gray`,
-            "margin": "1vw",
+            "margin": "20px",
             "color": "black",
-            "font-size": "2vw",
+            "font-size": "40px",
         })
         $topRight.append(screenMap$this.$infos);
         const button$spaceship = new Button({$parent: $topRight, content: "宇宙飞船"})

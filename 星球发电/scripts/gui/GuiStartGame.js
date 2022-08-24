@@ -1,6 +1,5 @@
 import {compare} from "../util/Algorithm.js";
-import {Button} from "./util/GuiOther.js";
-import {soundPlayer$bigstar, soundPlayer$nightClothes} from "../init/Init.js";
+import {Button} from "./util/GuiWidgets.js";
 import {begin, screen$beginOfAll} from "./GuiBeginOfAll.js";
 import {screen$homeOfEarth} from "./GuiEarthHome.js";
 import {showSettings} from "../Settings.js";
@@ -8,6 +7,7 @@ import {creatElement} from "../util/Opera.js";
 import {storage} from "../SavedData.js";
 import {Dialog} from "./util/GuiDialog.js";
 import {Screen} from "./util/GuiScreen.js";
+import {soundPlayer$bigstar, soundPlayer$nightClothes} from "./util/Sound.js";
 
 export const screen$startGame = new Screen();
 
@@ -20,9 +20,9 @@ const $divStartGame = creatElement("div")
         "top": "50%",
         "transform": "translate(-50%, -50%)",
     })
-    .append(creatElement("span").html("星球发电").css({"font-size": "10vw"}))
+    .append(creatElement("span").html("星球发电").css({"font-size": "200px"}))
     .append(creatElement('br'))
-    .append(creatElement("span").html("Planetary Power Generation").css({"font-size": "2vw"}))
+    .append(creatElement("span").html("Planetary Power Generation").css({"font-size": "40px"}))
     .append(creatElement('br'))
 
 const dialog$hasError = new Dialog({content: "", canBeClosed: true})
@@ -79,7 +79,7 @@ $divStartGame.append(creatElement('br'))
             .html("作者：myworldzycpc, TheRedMaker_")
             .css({
                 "text-align": "right",
-                "font-size": "1vw"
+                "font-size": "20px"
             })
     )
 screen$startGame.$screenBox.append($divStartGame);

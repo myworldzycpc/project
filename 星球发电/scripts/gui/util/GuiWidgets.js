@@ -1,7 +1,8 @@
-import {_speed, _speedTime} from "../../util/Algorithm.js";
-import {$background, $body, soundPlayer$bigstar} from "../../init/Init.js";
+import {calculatedSpeedTime} from "../../util/Algorithm.js";
+import {$background} from "../../init/Init.js";
 import {creatElement} from "../../util/Opera.js";
 import {GuiBase} from "./GuiBase.js";
+import {soundPlayer$bigstar} from "./Sound.js";
 
 //todo
 
@@ -65,40 +66,40 @@ export class Button extends GuiBase {
         const color = button$this.color;
         button$this.styles = {
             "normal": {
-                "padding": "1vw",
-                "border-radius": "1vw",
+                "padding": "20px",
+                "border-radius": "20px",
                 "background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`,
-                "margin": "1vw",
+                "margin": "20px",
                 "color": "white",
-                "font-size": "2vw",
+                "font-size": "40px",
                 "border": "none",
                 "filter": "none",
                 "box-shadow": "none",
-                "transition": `${_speedTime(0.2)}s`,
+                "transition": `${calculatedSpeedTime(0.2)}s`,
             },
             "hover": {
-                "padding": "1vw",
-                "border-radius": "1vw",
+                "padding": "20px",
+                "border-radius": "20px",
                 "background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`,
-                "margin": "1vw",
+                "margin": "20px",
                 "color": "white",
-                "font-size": "2vw",
+                "font-size": "40px",
                 "border": "none",
                 "filter": "none",
-                "box-shadow": `0 0 1vw rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.5)`,
-                "transition": `${_speedTime(0.2)}s`,
+                "box-shadow": `0 0 20px rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.5)`,
+                "transition": `${calculatedSpeedTime(0.2)}s`,
             },
             "active": {
-                "padding": "1vw",
-                "border-radius": "1vw",
+                "padding": "20px",
+                "border-radius": "20px",
                 "background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`,
-                "margin": "1vw",
+                "margin": "20px",
                 "color": "white",
-                "font-size": "2vw",
+                "font-size": "40px",
                 "border": "none",
                 "filter": "brightness(0.8)",
-                "box-shadow": `0 0 1vw rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.5)`,
-                "transition": `${_speedTime(0.2)}s`,
+                "box-shadow": `0 0 20px rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.5)`,
+                "transition": `${calculatedSpeedTime(0.2)}s`,
             }
         }
         if (button$this.pressed) {
@@ -125,41 +126,12 @@ export class Button extends GuiBase {
         }
     }
 
-}
-
-export class SoundPlayer extends GuiBase {
-    constructor(src, startTime = 0.0) {
-        super();
-        const soundPlayer$this = this;
-        soundPlayer$this.startTime = startTime;
-        // <video class="hide" id="sound" src="破苍穹.mp3" preload="auto"></video>
-        soundPlayer$this.$video = creatElement("video")
-            .addClass("hide")
-            .attr("src", src)
-            .attr("preload", "auto")
-        $body.append(soundPlayer$this.$video);
+    get content() {
+        return this.$button.html()
     }
 
-    play(volume = 1.0, playbackRate = 1.0, startTime = 0, loop = false, callback) {
-        const soundPlayer$this = this;
-        soundPlayer$this.$video[0].volume = volume;
-        soundPlayer$this.$video[0].playbackRate = _speed(playbackRate);
-        soundPlayer$this.$video[0].currentTime = soundPlayer$this.startTime + startTime;
-        soundPlayer$this.$video[0].loop = loop;
-
-        soundPlayer$this.$video[0].play();
-        if (callback) {
-            soundPlayer$this.$video.bind('ended', function () {
-                callback();
-            })
-        } else {
-            soundPlayer$this.$video.unbind('ended')
-        }
-    }
-
-    stop() {
-        const soundPlayer$this = this;
-        soundPlayer$this.$video[0].pause();
+    set content(value) {
+        return this.$button.html(value)
     }
 
 }
@@ -219,40 +191,40 @@ export class Entry extends GuiBase {
         const color = entry$this.color;
         entry$this.styles = {
             "normal": {
-                "padding": "1vw",
-                "border-radius": "1vw",
+                "padding": "20px",
+                "border-radius": "20px",
                 "background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`,
-                "margin": "1vw",
+                "margin": "20px",
                 "color": "black",
-                "font-size": "2vw",
+                "font-size": "40px",
                 "border": "none",
                 "filter": "none",
                 "box-shadow": "none",
-                "transition": `${_speedTime(0.2)}s`,
+                "transition": `${calculatedSpeedTime(0.2)}s`,
             },
             "hover": {
-                "padding": "1vw",
-                "border-radius": "1vw",
+                "padding": "20px",
+                "border-radius": "20px",
                 "background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`,
-                "margin": "1vw",
+                "margin": "20px",
                 "color": "black",
-                "font-size": "2vw",
+                "font-size": "40px",
                 "border": "none",
                 "filter": "none",
-                "box-shadow": `0 0 1vw rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.5)`,
-                "transition": `${_speedTime(0.2)}s`,
+                "box-shadow": `0 0 20px rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.5)`,
+                "transition": `${calculatedSpeedTime(0.2)}s`,
             },
             "active": {
-                "padding": "1vw",
-                "border-radius": "1vw",
+                "padding": "20px",
+                "border-radius": "20px",
                 "background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`,
-                "margin": "1vw",
+                "margin": "20px",
                 "color": "black",
-                "font-size": "2vw",
+                "font-size": "40px",
                 "border": "none",
                 "filter": "brightness(0.8)",
-                "box-shadow": `0 0 1vw rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.5)`,
-                "transition": `${_speedTime(0.2)}s`,
+                "box-shadow": `0 0 20px rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.5)`,
+                "transition": `${calculatedSpeedTime(0.2)}s`,
             }
         }
         if (entry$this.pressed) {
@@ -270,5 +242,69 @@ export class Entry extends GuiBase {
 
     setValue(value) {
         return this.$input.val(value)
+    }
+}
+
+export class Badge extends GuiBase {
+
+    /**
+     *
+     * @param {*|{$parent: *|HTMLElement|jQuery, color: number[], backgroundColor: number[], content: string}}options
+     */
+    constructor(options = {}) {
+        super();
+        const button$this = this;
+        options = $.extend({
+            $parent: $background,
+            color: [255, 255, 255],
+            backgroundColor: [128, 128, 128],
+            content: "",
+        }, options);
+
+        button$this.$span = creatElement("span")
+        button$this.$span.html(options.content);
+        options.$parent.append(this.$span);
+
+        button$this.color = options.color;
+        button$this.backgroundColor = options.backgroundColor;
+
+        button$this.#updateStyle()
+
+    };
+
+    #updateStyle() {
+        const badge$this = this;
+        const color = badge$this.color;
+        const backgroundColor = badge$this.backgroundColor;
+        badge$this.styles = {
+            "normal": {
+                "padding": "20px",
+                "border-radius": "20px",
+                "background-color": `rgb(${backgroundColor.join(",")})`,
+                "margin": "20px",
+                "color": `rgb(${color.join(",")})`,
+                "font-size": "40px",
+                "border": "none",
+                "filter": "none",
+                "box-shadow": "none",
+            }
+        }
+
+        badge$this.$span.css(badge$this.styles.normal);
+
+    }
+
+    changeColor(color) {
+        const button$this = this;
+        button$this.color = color;
+        button$this.#updateStyle();
+    }
+
+    get content() {
+        return this.$span.html()
+    }
+
+    set content(value) {
+        return this.$span.html(value)
     }
 }
