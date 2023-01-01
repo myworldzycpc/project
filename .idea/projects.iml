@@ -12,5 +12,8 @@
     <orderEntry type="module" module-name="html" />
     <orderEntry type="library" name="jquery" level="application" />
     <orderEntry type="library" name="eruda" level="application" />
+    <orderEntry type="library" name="bootstrap" level="application" />
+    <orderEntry type="library" name="jquery" level="application" />
+    <orderEntry type="library" name="eruda" level="application" />
   </component>
 </module>

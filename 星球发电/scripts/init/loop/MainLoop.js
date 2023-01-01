@@ -8,5 +8,5 @@ export function mainLoop() {
     tickTasks.forEach(tickTask$item => {
         tickTask$item.trigger();
     });
-    debugInfo(screenData.dialogLevel);
+    // debugInfo(screenData.dialogLevel);
 }
